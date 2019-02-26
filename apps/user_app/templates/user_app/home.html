@@ -1,0 +1,83 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    {% load static %}
+    <link rel="stylesheet" href="{% static 'user_app/css/style.css' %}">
+    <link rel="stylesheet" href="{% static 'user_app/css/bootstrap.min.css' %}">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Home Page</title>
+</head>
+<body>
+    
+    <nav class="navbar navbar-dark bg-light">
+        <div class="left">
+            <h2>
+                Welcome {{user.first_name}} {{user.last_name}} !
+            </h2>
+            
+        </div>
+        <div class="right">
+            <a href="/myaccount/{{user.id}}">
+                <h3>Edit My Account</h3>
+            </a>
+            <a href="/logout">
+                <button type="button" class="btn btn-primary">Logout</button>
+            </a>
+        </div>
+    </nav>
+
+    <div class="container">
+        <div class="row">
+            <div class="col-md-6">
+                <h3 class="quote_head_right"> Quotes</h3>
+                {%for quotes in all_quotes %}
+                    <div class="left_main">
+                        
+                        <p><strong>{{quotes.author}}:</strong> "{{quotes.quote_description}}"</p>
+                        <p><strong>Posted By:</strong> 
+                            <a href="user/{{user.id}}">{{user.first_name}} {{user.last_name}}</a>
+                        </p>
+                        <button class="btn btn-primary">Like</button>
+                        {% if user.id = us % }
+                    </div>
+                {%endfor%}
+            </div>
+            <div class="col-md-6">
+                {% if messages %}
+                    <ul class="messages">
+                        {% for message in messages %}
+                        <li>
+                            {{ message }}
+                            </li>
+                        {% endfor %}
+                    </ul>
+                {% endif %}
+                <h3 class="quote_head">Add A Quote</h3>
+                <form action="/quote_index" method="post">
+                    {% csrf_token %}
+                    <div class="form-group row">
+                        <label for="author" class="col-sm-2 col-form-label">Author</label>
+                        <div class="col-sm-10">
+                            <input type="text" class="form-control" id="author" name="author" value="">
+                        </div>
+                    </div>
+                    <div class="form-group row">
+                        <label for="quote" class="col-sm-2 col-form-label">Quote</label>
+                        <div class="col-sm-10">
+                            <textarea class="form-control" rows="10" cols="" name="quote" id="quote" value=""></textarea>
+                        </div>
+                    </div>
+                    <div class="form-group row">
+                        <label for="" class="col-sm-2 col-form-label"></label>
+                        <div class="col-sm-10">
+                            <button type="submit" class="btn btn-primary">Submit</button>
+                        </div>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+</body>
+</html>

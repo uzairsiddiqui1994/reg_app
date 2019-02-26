@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    {% load static %}
+    <link rel="stylesheet" href="{% static 'user_app/css/style.css' %}">
+    <link rel="stylesheet" href="{% static 'user_app/css/bootstrap.min.css' %}">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Home Page</title>
+</head>
+<body>
+    
+    <nav class="navbar navbar-dark bg-light">
+        <div class="left">
+            <h2>
+                Edit My Account!
+            </h2>
+            
+        </div>
+        <div class="right">
+            <a href="/home">
+                <h3>Back</h3>
+            </a>
+            <a href="/logout">
+                <button type="button" class="btn btn-primary">Logout</button>
+            </a>
+        </div>
+    </nav>
+
+    <div class="container">
+        <div class="main">
+            <form action="/updatedaccount/{{user.id}}" method="POST">
+                {% csrf_token %}
+                <div class="form-group row">
+                    <label for="first_name" class="col-sm-2 col-form-label">First_name</label>
+                    <div class="col-sm-10">
+                        <input type="text" class="form-control" id="first_name" name="first_name" value="{{user.first_name}}">
+                    </div>
+                </div>
+                <div class="form-group row">
+                    <label for="last_name" class="col-sm-2 col-form-label">Last_name</label>
+                    <div class="col-sm-10">
+                        <input type="text" class="form-control" id="last_name" name="last_name" value="{{user.last_name}}">
+                    </div>
+                </div>
+                <div class="form-group row">
+                    <label for="email" class="col-sm-2 col-form-label">Email</label>
+                    <div class="col-sm-10">
+                        <input type="text" class="form-control" id="email" name="email" value="{{user.email}}">
+                    </div>
+                </div>
+                <div class="form-group row">
+                    <label for="" class="col-sm-2 col-form-label"></label>
+                    <div class="col-sm-10">
+                        <button type="submit" class="btn btn-primary">Update</button>
+                    </div>
+                </div>
+            </form>
+        </div>
+    </div>
+</body>
+</html>

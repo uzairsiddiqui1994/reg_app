@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    {% load static %}
+    <link rel="stylesheet" href="{% static 'user_app/css/style.css' %}">
+    <link rel="stylesheet" href="{% static 'user_app/css/bootstrap.min.css' %}">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Home Page</title>
+</head>
+<body>
+    
+    <nav class="navbar navbar-dark bg-light">
+        <div class="left">
+                
+            </div>
+        <div class="right">
+            <a href="/home">
+                <h3>Back</h3>
+            </a>
+            <a href="/logout">
+                <button type="button" class="btn btn-primary">Logout</button>
+            </a>
+        </div>
+    </nav>
+
+    <div class="container">
+        <div class="main_border">
+            <h2>{{user.first_name}} {{user.last_name}} Quotes</h2>
+            <div class="quote_border">
+                {% for quotes in all_quotes %}
+                    <p class="quote_border"><strong>{{quotes.author}}:</strong> "{{quotes.quote_description}}"</p>
+                {%endfor%}
+            </div>
+        </div>
+    </div>
+</body>
+</html>
